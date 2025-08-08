@@ -1,0 +1,3 @@
+main.o: ../Source/main.c ../Source/types.h ../Source/page.h \
+ ../Source/mode_switch.h
+page.o: ../Source/page.c ../Source/page.h ../Source/types.h

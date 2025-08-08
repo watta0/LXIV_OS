@@ -1,0 +1,6 @@
+k64_utility.o: ../Source/k64_utility.c ../Source/k64_utility.h \
+ ../Source/types.h
+keyboard.o: ../Source/keyboard.c ../Source/keyboard.h ../Source/types.h \
+ ../Source/assembly_utility.h ../Source/k64_utility.h
+main.o: ../Source/main.c ../Source/types.h ../Source/keyboard.h \
+ ../Source/k64_utility.h
