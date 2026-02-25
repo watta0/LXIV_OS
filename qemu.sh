@@ -1,1 +1,4 @@
-qemu-system-x86_64 -L . -m 64 -fda /home/mia00/Desktop/prog/os/LXIV/Disk.img -M pc
+#! /usr/bin/env bash
+
+cd "$(dirname "$0")"
+qemu-system-x86_64 -L . -m 64 -fda ./Disk.img -M pc
