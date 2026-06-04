@@ -3,7 +3,7 @@
 #include "mode_switch.h"
 
 
-void kprint( int x, int y, const char *str);
+void kprint(int x, int y, const char *str);
 void kprint_form(int x, int y, const char *str);
 void kprint_mark(int y, BOOL mark);
 
@@ -66,10 +66,7 @@ void main(void)
 
 	kswitch_exe_k64();
 
-
-		
-
-	INFINITE_LOOP:
+INFINITE_LOOP:
 	while(1);
 }
 
@@ -78,7 +75,7 @@ void main(void)
 
 void kprint(int x, int y, const char *str)
 {	
-	if (str == NULL)
+	if (!str)
 		return;
 
 	struct kcharacter *screen = (struct kcharacter*)0xb8000;//!!
@@ -86,7 +83,7 @@ void kprint(int x, int y, const char *str)
 
 	screen += (y * MONITORWIDTH) + x;
 
-	for (;str[i] != '\0'; i++) {
+	for (; str[i] != '\0'; ++i) {
 		screen[i].character = str[i];	
 	}
 
@@ -101,7 +98,7 @@ void kprint_form(int x, int y, const char *str)
 
 void kprint_mark(int y, BOOL mark)
 {
-	if (mark == TRUE)
+	if (mark)
 		kprint(1, y, "PASS");
 	else
 		kprint(1, y, "ERROR");
@@ -111,7 +108,7 @@ BOOL kinit_k64_area(void)
 {
 	DWORD *current_addr = (DWORD*)0x100000; //1MB
 
-	while((DWORD)current_addr < 0x600000) {
+	while((QWORD)current_addr < 0x600000) {
 		*current_addr = 0x00;
 		if (*current_addr != 0x00)
 			return FALSE;
@@ -147,7 +144,7 @@ void kcopy_k64_2mb(void)
 	WORD total_sector_cnt =*((WORD*)0x7c05);
 	WORD k32_sector_cnt	= *((WORD*)0x7c07);
 
-	DWORD *src_addr = (DWORD*) (0x10000 + k32_sector_cnt * 512);
+	DWORD *src_addr = (DWORD*)(0x10000 + k32_sector_cnt * 512);
 	DWORD *target_addr = (DWORD*)0x200000;
 
 	DWORD size = 512 * (total_sector_cnt - k32_sector_cnt)  / sizeof(DWORD); 
